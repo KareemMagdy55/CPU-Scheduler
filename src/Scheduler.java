@@ -1,7 +1,12 @@
 import java.util.ArrayList;
 
-public interface Scheduler {
+public abstract class Scheduler {
 
-    void run(ArrayList<Process>processes);
+    ArrayList<Process>timeline;
+    Scheduler(){
+        timeline = new ArrayList<>();
+    }
+    public abstract void run(ArrayList<Process> processes);
+    public abstract void printStats();
 
 }

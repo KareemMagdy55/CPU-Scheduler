@@ -26,13 +26,15 @@ public class MainAlgorithm {
             process.arrivalTime = in.nextInt();
             in.nextLine();
             process.burstTime = in.nextInt();
+            process.processNum= i+1;
 //            process.priorityNumber = in.nextInt();
 //            process.color =in.nextInt();
 
             System.out.println("---------------------------------------");
             processes.add(process);
         }
-        Scheduler s = new SJF(contextSwitchingTime);
+        Scheduler s = new SRTF();
         s.run(processes);
+        s.printStats();
     }
 }

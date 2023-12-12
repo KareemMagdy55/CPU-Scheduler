@@ -8,11 +8,20 @@ public class Process {
     int executionBeginTime;
     int finishingTime ;
 
+    int processNum;
     public int getArrivalTime() {
         return arrivalTime;
     }
 
     public int getBurstTime() {
         return burstTime;
+    }
+
+    public int getPriorityNumber() {
+        return priorityNumber;
+    }
+
+    public int getProcessNum() {
+        return processNum;
     }
 }

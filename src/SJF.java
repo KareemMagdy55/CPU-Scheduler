@@ -1,15 +1,14 @@
 import java.util.*;
 
-public class SJF implements Scheduler {
+public class SJF extends Scheduler {
     ArrayList<Process> processes;
-    ArrayList<Process> timeLine;
     int contextSwitchTime;
 
 
     @Override
     public void run(ArrayList<Process> processes) {
         this.processes = processes;
-        timeLine = new ArrayList<>();
+        timeline = new ArrayList<>();
 
 
         int currentTime = 0 ;
@@ -31,7 +30,7 @@ public class SJF implements Scheduler {
             currentTime += p.burstTime;
             p.finishingTime = currentTime;
 
-            timeLine.add(p);
+            timeline.add(p);
             processes.remove(p);
 
             currentTime += contextSwitchTime ;
@@ -39,11 +38,39 @@ public class SJF implements Scheduler {
         }
 
 
-        for (Process process : timeLine) {
-            System.out.println(process.name);
+    }
+
+    @Override
+    public void printStats() {
+        float avgWaitingTime = 0 ;
+        int avgTurnaroundTime = 0 ;
+
+        System.out.println("-------Execution order------");
+        for (Process process : timeline) {
+            System.out.print(process.name + ' ');
+            int turnaroundTime = process.finishingTime - process.arrivalTime;
+            avgWaitingTime += turnaroundTime - process.burstTime;
+            avgTurnaroundTime += turnaroundTime;
         }
+        System.out.println("\n======================================");
+        System.out.println("---------Waiting Time for each process--------");
+        for (Process process : timeline) {
+            int turnaroundTime = process.finishingTime - process.arrivalTime;
+            int waitingTime  =turnaroundTime - process.burstTime;
+            System.out.println(process.name + "====>" + waitingTime);
+        }
+        System.out.println("======================================");
+        System.out.println("---------Turnaround Time for each process--------");
+        for (Process process : timeline) {
+            int turnaroundTime = process.finishingTime - process.arrivalTime;
+            System.out.println(process.name + "====>" + turnaroundTime);
+        }
+        System.out.println("======================================");
+        System.out.println("Average Waiting Time = " + avgWaitingTime / timeline.size());
+        System.out.println("Average Turnaround Time = " + avgTurnaroundTime/ timeline.size());
 
     }
+
 
     SJF(int contextSwitchTime) {
         this.contextSwitchTime = contextSwitchTime;
