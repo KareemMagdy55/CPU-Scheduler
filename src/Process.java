@@ -42,4 +42,7 @@ public class Process {
     public int getAgFactor(){
         return AG.processesAG.get(this.processNum);
     }
+    public int getStarvationVal(){
+        return SRTF.starvationSolverMap.get(this.processNum);
+    }
 }

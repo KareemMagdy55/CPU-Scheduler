@@ -9,4 +9,7 @@ public abstract class Scheduler {
     public abstract void run(ArrayList<Process> processes);
     public abstract void printStats();
 
+    public ArrayList<Process> getTimeline() {
+        return timeline;
+    }
 }

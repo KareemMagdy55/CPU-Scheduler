@@ -33,7 +33,7 @@ public class MainAlgorithm {
             System.out.println("---------------------------------------");
             processes.add(process);
         }
-        Scheduler s = new AG(roundRobinQuantumTime);
+        Scheduler s = new SRTF();
         s.run(processes);
         s.printStats();
     }

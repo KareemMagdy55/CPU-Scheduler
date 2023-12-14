@@ -43,6 +43,7 @@ public class PriorityScheduler extends Scheduler{
             }
 
 
+
             Process p = readyQueue.peek();
             if (p.arrivalTime <= currTime){
                 readyQueue.poll();
@@ -52,6 +53,9 @@ public class PriorityScheduler extends Scheduler{
                 p.executionBeginTime = currTime ;
                 currTime += p.burstTime;
                 p.finishingTime = currTime;
+
+            }else {
+                currTime ++ ;
             }
         }
 
