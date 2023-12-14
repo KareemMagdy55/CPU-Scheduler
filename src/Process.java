@@ -7,8 +7,8 @@ public class Process {
     int priorityNumber;
     int executionBeginTime;
     int finishingTime ;
-    int processNum;
 
+    int processNum;
     public Process(Process process) {
         this.name = process.name;
         this.color = process.color;
@@ -39,8 +39,7 @@ public class Process {
     public int getProcessNum() {
         return processNum;
     }
-
-    public int getStarvationVal() {
-        return SRTF.starvationSolverMap.get(this.processNum);
+    public int getAgFactor(){
+        return AG.processesAG.get(this.processNum);
     }
 }

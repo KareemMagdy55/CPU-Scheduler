@@ -27,13 +27,13 @@ public class MainAlgorithm {
             in.nextLine();
             process.burstTime = in.nextInt();
             process.processNum= i+1;
-//            process.priorityNumber = in.nextInt();
+            process.priorityNumber = in.nextInt();
 //            process.color =in.nextInt();
 
             System.out.println("---------------------------------------");
             processes.add(process);
         }
-        Scheduler s = new SRTF();
+        Scheduler s = new AG(roundRobinQuantumTime);
         s.run(processes);
         s.printStats();
     }
