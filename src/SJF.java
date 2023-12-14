@@ -13,6 +13,7 @@ public class SJF extends Scheduler {
 
         int currentTime = 0 ;
         int sz = processes.size();
+
         for (int i = 0; i < sz; i++) {
             int mnBurstTime= Integer.MAX_VALUE;
             Process p  = new Process();
@@ -25,19 +26,14 @@ public class SJF extends Scheduler {
                     }
                 }
             }
-
             p.executionBeginTime = currentTime ;
             currentTime += p.burstTime;
             p.finishingTime = currentTime;
 
             timeline.add(p);
             processes.remove(p);
-
             currentTime += contextSwitchTime ;
-
         }
-
-
     }
 
     @Override

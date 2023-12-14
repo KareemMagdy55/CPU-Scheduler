@@ -10,9 +10,9 @@ public class PriorityScheduler extends Scheduler{
 
     PriorityScheduler(){
         agingFactor = 0.5f;
-
-        // any prime number above 10 would be better choice to change priority
+        // any prime number above 10 would be better choice in changing priority formula.
         timeToChange = 17;
+
     }
 
 
@@ -27,6 +27,10 @@ public class PriorityScheduler extends Scheduler{
         readyQueue.addAll(processes);
         int currTime = 0 ;
         while(!readyQueue.isEmpty()){
+            // solve starvation problem
+            // at every period of time ( PRIME number of seconds), the priority of all
+            // process is being updated by specific formula to solve the starvation (Waiting for a long time for Big priority Processes)...
+
             if (currTime %  timeToChange == 0 && currTime != 0){
 
                 ArrayList<Process>capture = new ArrayList<>();
@@ -55,7 +59,7 @@ public class PriorityScheduler extends Scheduler{
     }
 
     private void updatePriority(Process p, int currentTime) {
-        p.priorityNumber += ((currentTime - p.arrivalTime) * agingFactor);
+        p.priorityNumber -= ((currentTime - p.arrivalTime) * agingFactor);
     }
 
     @Override
