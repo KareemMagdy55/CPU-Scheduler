@@ -19,17 +19,6 @@ public class SRTF extends Scheduler{
     }
     @Override
     public void run(ArrayList<Process> processes) {
-        // sorted by arrival and burst time
-        // check if the first process has (arrivalTime <= currentTime)
-        // choose the first process p
-        // p.burstTime -- ;
-        // currentTime ++ ;
-        // currentTime == anthor process arrival time
-        // get off curr process then add the new process
-        // 0  1  2  3  4
-
-
-
 
         readyQueue = new PriorityQueue<>(Comparator
                 .comparingInt(Process::getArrivalTime)
