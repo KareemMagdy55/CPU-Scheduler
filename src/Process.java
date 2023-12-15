@@ -20,9 +20,22 @@ public class Process {
         this.processNum = process.processNum;
     }
 
+    public Process(String name, int arrivalTime) {
+        this.name = name;
+        this.arrivalTime = 0;
+        // set all to zero
+        this.burstTime = arrivalTime;
+        this.priorityNumber = 0;
+        this.executionBeginTime = 0;
+        this.finishingTime = 0;
+        this.processNum = 0;
+    }
     public Process() {
 
     }
+
+    // copy constructor
+
 
     public int getArrivalTime() {
         return arrivalTime;

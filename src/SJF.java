@@ -38,6 +38,9 @@ public class SJF extends Scheduler {
 
     @Override
     public void printStats() {
+        System.out.println("======================================");
+        System.out.println("---------SJF Scheduler--------");
+
         float avgWaitingTime = 0 ;
         int avgTurnaroundTime = 0 ;
 

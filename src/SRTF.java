@@ -61,7 +61,10 @@ public class SRTF extends Scheduler {
                 }
             }
 
-            if (readyQueue.isEmpty()) continue;
+            if (readyQueue.isEmpty()) {
+                currentTime ++ ;
+                continue;
+            }
 
             Process peekProcess = new Process(readyQueue.poll());
 
@@ -103,6 +106,9 @@ public class SRTF extends Scheduler {
 
     @Override
     public void printStats() {
+        System.out.println("======================================");
+        System.out.println("---------SRTF Scheduler--------");
+
         float avgWaitingTime = 0;
         int avgTurnaroundTime = 0;
 

@@ -68,6 +68,8 @@ public class PriorityScheduler extends Scheduler{
 
     @Override
     public void printStats() {
+        System.out.println("======================================");
+        System.out.println("---------Priority Scheduler--------");
         float avgWaitingTime = 0 ;
         int avgTurnaroundTime = 0 ;
 
