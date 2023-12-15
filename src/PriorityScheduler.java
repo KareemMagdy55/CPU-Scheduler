@@ -24,7 +24,13 @@ public class PriorityScheduler extends Scheduler{
                 thenComparingInt(Process::getPriorityNumber).
                 thenComparingInt(Process::getProcessNum));
 
-        readyQueue.addAll(processes);
+
+
+
+        for (Process value : processes) {
+            this.readyQueue.add(new Process(value));
+        }
+//        readyQueue.addAll(new ArrayList<>(processes));
         int currTime = 0 ;
         while(!readyQueue.isEmpty()){
             // solve starvation problem

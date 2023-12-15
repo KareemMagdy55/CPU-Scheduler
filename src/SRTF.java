@@ -37,7 +37,12 @@ public class SRTF extends Scheduler {
             starvationSolverMap.put(p.getProcessNum(), 0);
 
 
-        this.processes = processes;
+        this.processes = new ArrayList<>();
+
+        for (Process value : processes) {
+            this.processes.add(new Process(value));
+        }
+
         readyQueue = new PriorityQueue<>(Comparator
                 .comparingInt(Process::getStarvationVal)
                 .thenComparingInt(Process::getBurstTime)
@@ -61,44 +66,43 @@ public class SRTF extends Scheduler {
                 }
             }
 
-            if (readyQueue.isEmpty()) {
-                currentTime ++ ;
-                continue;
-            }
-
-            Process peekProcess = new Process(readyQueue.poll());
-
-            // update process info.
-            peekProcess.burstTime--;
-            peekProcess.finishingTime = currentTime + 1;
+            if (!readyQueue.isEmpty()) {
 
 
-            if (!timeline.isEmpty() && Objects.equals(timeline.get(timeline.size() - 1).processNum, peekProcess.processNum)) {
+                Process peekProcess = readyQueue.poll();
 
-                Process lastTimeLineProcess = timeline.get(timeline.size() - 1);
+                // update process info.
+                peekProcess.burstTime--;
+                peekProcess.finishingTime = currentTime + 1;
 
-                lastTimeLineProcess.finishingTime = currentTime + 1;
-                lastTimeLineProcess.burstTime = peekProcess.burstTime;
 
-                peekProcess = lastTimeLineProcess;
+                if (!timeline.isEmpty() && Objects.equals(timeline.get(timeline.size() - 1).processNum, peekProcess.processNum)) {
 
-            } else {
-                timeline.add(peekProcess);
-                peekProcess.executionBeginTime = currentTime;
+                    Process lastTimeLineProcess = timeline.get(timeline.size() - 1);
 
-            }
+                    lastTimeLineProcess.finishingTime = currentTime + 1;
+                    lastTimeLineProcess.burstTime = peekProcess.burstTime;
 
-            updateProcessesList(peekProcess);
-            if (peekProcess.burstTime == 0){
-                for (int i = 0; i < processes.size(); i++) {
-                    Process tmp = processes.get(i);
-                    if (tmp.getProcessNum() == peekProcess.getProcessNum()) {
-                        processes.remove(i);
-                        break;
-                    }
+                    peekProcess = lastTimeLineProcess;
+
+                } else {
+                    timeline.add(peekProcess);
+                    peekProcess.executionBeginTime = currentTime;
+
                 }
-            }else readyQueue.add(peekProcess);
 
+                updateProcessesList(peekProcess);
+                if (peekProcess.burstTime == 0){
+                    for (int i = 0; i < processes.size(); i++) {
+                        Process tmp = processes.get(i);
+                        if (tmp.getProcessNum() == peekProcess.getProcessNum()) {
+                            processes.remove(i);
+                            break;
+                        }
+                    }
+                }else readyQueue.add(peekProcess);
+
+            }
             currentTime += 1;
         }
 

@@ -105,13 +105,6 @@ public class AG extends Scheduler {
         }
         this.processes = processes;
         buildAGFactors();
-//        processesAG.put(1, 2); // 0 5 6
-//        // 20 5
-//        processesAG.put(2, 50);
-////        processesAG.put(3, 16);
-////        processesAG.put(4, 43);
-////        processes.get(3).arrivalTime =  55;
-
 
         readyQueue = new PriorityQueue<>(Comparator
                 .comparingInt(Process::getAgFactor).
@@ -168,7 +161,6 @@ public class AG extends Scheduler {
             if (!timeline.isEmpty() && Objects.equals(timeline.get(timeline.size() - 1).processNum, p.processNum)) {
 
                 Process lastTimeLineProcess = timeline.get(timeline.size() - 1);
-
                 lastTimeLineProcess.finishingTime = currentTime;
                 lastTimeLineProcess.burstTime = p.burstTime;
 
@@ -184,9 +176,7 @@ public class AG extends Scheduler {
                         circular.remove(i);
                         break;
                     }
-
                 }
-
                 finshedProcess -= 1  ;
             } else if (processesQuantumTime.get(p.getProcessNum()) == 0 && p.burstTime > 0) { // case 1  10%
                 // 4

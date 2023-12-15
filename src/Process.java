@@ -1,6 +1,8 @@
+import java.awt.*;
+
 public class Process {
     String name ;
-    int color;
+    Color color;
 
     int arrivalTime;
     int burstTime;

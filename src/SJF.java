@@ -7,7 +7,11 @@ public class SJF extends Scheduler {
 
     @Override
     public void run(ArrayList<Process> processes) {
-        this.processes = processes;
+        this.processes = new ArrayList<>();
+
+        for (Process value : processes) {
+            this.processes.add(new Process(value));
+        }
         timeline = new ArrayList<>();
 
 
